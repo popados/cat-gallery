@@ -16,7 +16,8 @@
             --pale-blue: #30327c;
             --accent-yellow: #ffeb99;
             /* pale yellow */
-            --primary-yellow: antiquewhite;;
+            --primary-yellow: antiquewhite;
+            ;
             /* pale yellow */
             --background-light: #fffaf5;
             --second-cyan: #2a2f50;
@@ -186,15 +187,17 @@
 
         /* CAT FACTS */
         .facts {
-            background: #ffeb9b;
+            background: var(--second-cyan);
+            color: var(--border-dark);
             border: 3px solid var(--border-dark);
             box-shadow: 6px 6px 0 var(--primary-pink);
             padding: 2rem;
             border-radius: 8px;
+            margin: 2rem;
         }
-
         .facts ul {
             list-style: none;
+            color: var(--background-light);
         }
 
         .facts li {
@@ -258,19 +261,80 @@
             padding: 1.5rem;
             border-top: 4px solid var(--border-dark);
         }
+
+        .nav-toggle {
+            display: none;
+            background: #00ccff;
+            border: 3px solid #000;
+            padding: 0.6rem 1.2rem;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 4px 4px 0 #ff0066;
+        }
+
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            padding: 1rem;
+        }
+
+        .nav-links a {
+            background: var(--pale-blue);
+            border: 3px solid #000;
+            padding: 0.6rem 1.2rem;
+            text-transform: uppercase;
+            font-weight: bold;
+            color: whitesmoke;
+            box-shadow: 4px 4px 0 #ff0066;
+            transition: transform 0.1s ease, background 0.2s ease;
+        }
+
+        .nav-links a:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: 6px 6px 0 #000;
+        }
+
+        .nav-links a.active {
+            background: #ff0066;
+            color: #fff;
+            box-shadow: 4px 4px 0 #000;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                flex-direction: column;
+                align-items: center;
+                display: none;
+            }
+
+            .nav-links.show {
+                display: flex;
+            }
+
+            .nav-toggle {
+                display: block;
+                margin: 0.5rem auto;
+            }
+        }
     </style>
 </head>
 
 <body>
     <!-- Navigation -->
     <nav>
-        <a href="#hero">Home</a>
-        <a href="#about">About</a>
-        <a href="#gallery">Gallery</a>
-        <a href="#blog">Blog</a>
-        <a href="#facts">Facts</a>
-        <a href="#affiliate">Shop</a>
-        <a href="#events">Events</a>
+        <button class="menu-toggle" aria-label="Toggle Menu">☰ Menu</button>
+        <div class="nav-links">
+            <a href="#hero">Home</a>
+            <a href="#about">About</a>
+            <a href="#gallery">Gallery</a>
+            <a href="#blog">Blog</a>
+            <a href="#facts">Facts</a>
+            <a href="#affiliate">Shop</a>
+            <a href="#events">Events</a>
+        </div>
     </nav>
     <!-- Hero -->
     <header class="hero" id="hero">
@@ -357,19 +421,27 @@
         <p>© 2025 My Cat Blog 🐾 | All Rights Reserved</p>
     </footer>
     <script>
+        const navToggle = document.querySelector(".menu-toggle");
+        const navLinks = document.querySelector(".nav-links");
+
+        navToggle.addEventListener("click", () => {
+            navLinks.classList.toggle("show");
+        });
+
+        // Active link highlight on scroll
         const sections = document.querySelectorAll("section, header.hero");
-        const navLinks = document.querySelectorAll("nav a");
+        const links = document.querySelectorAll(".nav-links a");
 
         window.addEventListener("scroll", () => {
             let current = "";
             sections.forEach(section => {
-                const sectionTop = section.offsetTop - 60;
+                const sectionTop = section.offsetTop - 70;
                 if (pageYOffset >= sectionTop) {
                     current = section.getAttribute("id");
                 }
             });
 
-            navLinks.forEach(link => {
+            links.forEach(link => {
                 link.classList.remove("active");
                 if (link.getAttribute("href") === "#" + current) {
                     link.classList.add("active");
