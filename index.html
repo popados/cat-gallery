@@ -6,7 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cat Blog</title>
     <link rel="stylesheet" href="css/default.css">
+    <link rel="stylesheet" href="css/responsive.css">
 </head>
+<!-- Lightbox -->
+<div id="lightbox" class="lightbox">
+    <span class="lightbox-close">&times;</span>
+    <img class="lightbox-content" alt="Expanded Cat">
+    <div id="lightbox-caption" class="lightbox-caption"></div>
+    <a class="lightbox-prev">&#10094;</a>
+    <a class="lightbox-next">&#10095;</a>
+</div>
 
 <body>
     <!-- Navigation -->
@@ -25,7 +34,8 @@
     <!-- Hero -->
     <header class="hero" id="hero">
         <div class="hero-content">
-            <img src="img/cat-pictures/A0FC37EE-008A-457F-BC97-F3C1825815DE_1_105_c.jpeg" alt="Profile Cat" class="profile-pic">
+            <img src="img/cat-pictures/A0FC37EE-008A-457F-BC97-F3C1825815DE_1_105_c.jpeg" alt="Profile Cat"
+                class="profile-pic">
             <h1>The cat window</h1>
             <p>Open Windows and Cats.</p>
         </div>
@@ -35,24 +45,27 @@
     <section class="about" id="about">
         <h2>About</h2>
         <p>
-        I like cats. Stories of cats. Pictures of my cats. Just cats, cat facts, and cat stuff.
+            I like cats. Stories of cats. Pictures of my cats. Just cats, cat facts, and cat stuff.
         </p>
         <p>
-        My cats names are Barnacle and Bean. The orange one is Barnacle, the calico one is Bean. 
-        </p>   
+            My cats names are Barnacle and Bean. The orange one is Barnacle, the calico one is Bean.
+        </p>
         <p>
-        Barnacle headbutts, nips, and will sit in los pantalons. Bean is more sassy. They both love to sit by the window.
-        </p>    
+            Barnacle headbutts, nips, and will sit in los pantalons. Bean is more sassy. They both love to sit by the
+            window.
+        </p>
     </section>
 
     <!-- Gallery -->
     <section id="gallery">
         <h2>Gallery</h2>
         <div class="gallery">
-            <img src="https://placekitten.com/400/300" alt="Cat 1">
-            <img src="https://placekitten.com/401/300" alt="Cat 2">
-            <img src="https://placekitten.com/402/300" alt="Cat 3">
-            <img src="https://placekitten.com/403/300" alt="Cat 4">
+            <img src="/img/cat-pictures/EAAF34D7-31D1-47B5-B01F-7F4860EBEF0F_1_105_c.jpeg" alt="Cat 1">
+            <img src="img/cat-pictures/1243D6C6-D4DA-4AAE-ABE0-E6FC14D0C409_1_105_c.jpeg" alt="Cat 2">
+            <img src="img/cat-pictures/B4F712CE-54A5-4221-AC3D-D432816D6D00_1_105_c.jpeg" alt="Cat 3">
+            <img src="img/cat-pictures/19E6B226-4A54-49FC-81E7-8C56C3AC92B4_1_105_c.jpeg" alt="Cat 4">
+            <img src="img/cat-pictures/955B83BF-D906-47E2-8E58-69A2C34B2674_1_105_c.jpeg" alt="Cat 5">
+            <img src="img/cat-pictures/063447B0-D6D1-40B6-97CC-F8056CF8B3AA_1_105_c.jpeg" alt="Cat 6">
         </div>
     </section>
 
@@ -94,7 +107,11 @@
             <a href="#">Automatic Feeder</a>
             <a href="#">Laser Pointer Toy</a>
             <a href="#">Comfy Cat Bed</a>
+            <a href="#">Extra Cat Tree</a>
+            <a href="#">Food for good diet</a>
+            <a href="#">Treats that taste good</a>
         </div>
+
     </section>
 
     <!-- Events -->
@@ -139,6 +156,71 @@
                 }
             });
         });
+        // Lightbox functionality
+        // Lightbox functionality with slideshow
+        const galleryImages = document.querySelectorAll(".gallery img");
+        const lightbox = document.getElementById("lightbox");
+        const lightboxImg = document.querySelector(".lightbox-content");
+        const lightboxClose = document.querySelector(".lightbox-close");
+        const prevBtn = document.querySelector(".lightbox-prev");
+        const nextBtn = document.querySelector(".lightbox-next");
+
+        let currentIndex = 0;
+
+        function showImage(index) {
+            if (index < 0) index = galleryImages.length - 1;
+            if (index >= galleryImages.length) index = 0;
+            currentIndex = index;
+            lightboxImg.src = galleryImages[currentIndex].src;
+            lightboxImg.alt = galleryImages[currentIndex].alt;
+        }
+
+        // Open lightbox
+        galleryImages.forEach((img, index) => {
+            img.addEventListener("click", () => {
+                lightbox.style.display = "block";
+                showImage(index);
+            });
+        });
+
+        // Close lightbox
+        lightboxClose.addEventListener("click", () => {
+            lightbox.style.display = "none";
+        });
+
+        // Navigation
+        prevBtn.addEventListener("click", () => showImage(currentIndex - 1));
+        nextBtn.addEventListener("click", () => showImage(currentIndex + 1));
+
+        // Close when clicking outside image
+        lightbox.addEventListener("click", (e) => {
+            if (e.target === lightbox) {
+                lightbox.style.display = "none";
+            }
+        });
+
+        // Keyboard controls
+        window.addEventListener("keydown", (e) => {
+            if (lightbox.style.display === "block") {
+                if (e.key === "Escape") {
+                    lightbox.style.display = "none";
+                } else if (e.key === "ArrowLeft") {
+                    showImage(currentIndex - 1);
+                } else if (e.key === "ArrowRight") {
+                    showImage(currentIndex + 1);
+                }
+            }
+        });
+        const captionText = document.getElementById("lightbox-caption");
+
+        function showImage(index) {
+            if (index < 0) index = galleryImages.length - 1;
+            if (index >= galleryImages.length) index = 0;
+            currentIndex = index;
+            lightboxImg.src = galleryImages[currentIndex].src;
+            lightboxImg.alt = galleryImages[currentIndex].alt;
+            captionText.textContent = galleryImages[currentIndex].alt || "";
+        }
     </script>
 </body>
 

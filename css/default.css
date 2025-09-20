@@ -133,6 +133,8 @@ header.hero {
 .about {
   padding: 3rem 2rem;
   text-align: center;
+  display: flex;
+  flex-direction: column;
 }
 
 .about h2 {
@@ -153,7 +155,12 @@ header.hero {
   box-shadow: 8px 8px 0 #000;
   margin: 2rem auto;
 }
-
+.about p:nth-child(3) {
+    transform: rotate(5deg);
+}
+.about p:nth-child(4) {
+    transform: rotate(-2.5deg);
+}
 /* Push pin effect */
 .about p::before {
   content: "";
@@ -163,12 +170,14 @@ header.hero {
   transform: translateX(-50%);
   width: 20px;
   height: 20px;
-  background: #ff0066;
+  background: var(--primary-pink);
   border: 3px solid #000;
   border-radius: 50%;
   box-shadow: 2px 2px 0 #000;
 }
-
+.about p:nth-child(3)::before {
+    background: var(--pale-blue);
+}
 
 .profile-pic {
   width: 250px;
