@@ -1,0 +1,10 @@
+{
+  "posts": [
+    {
+      "title": "Hello World",
+      "path": "posts/hello-world.md",
+      "excerpt": "My first post about cats and windows.",
+      "date": "2025-09-21"
+    }
+  ]
+}

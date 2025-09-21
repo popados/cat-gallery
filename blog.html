@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Cat Blog - Posts</title>
+    <link rel="stylesheet" href="css/default.css">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="blog.html">Blog</a>
+    </nav>
+
+    <main class="container">
+        <h1>Blog</h1>
+        <div id="posts-list" class="posts-list"></div>
+
+        <article id="post-content" class="post-content" style="display:none">
+            <h2 id="post-title"></h2>
+            <div id="post-meta" class="post-meta"></div>
+            <div id="post-body" class="post-body"></div>
+            <p><a id="back-to-list" href="#">Back to list</a></p>
+        </article>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="blog.js"></script>
+</body>
+</html>
